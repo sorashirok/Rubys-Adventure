@@ -3,7 +3,11 @@ guid: 7776ee0ccafbeae43aaed0342d569e1d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - projectilePrefab: {instanceID: 0}
+  - damgeEffect: {fileID: 3783194902910103239, guid: bcd42221de716e44cbcfff907f409c8f, type: 3}
+  - throwSound: {instanceID: 0}
+  - hitSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

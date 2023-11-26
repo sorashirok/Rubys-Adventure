@@ -9,7 +9,7 @@ public class RubyController : MonoBehaviour
     public int maxHealth = 5;
     
     public GameObject projectilePrefab;
-    
+    public ParticleSystem damgeEffect;
     public AudioClip throwSound;
     public AudioClip hitSound;
     
@@ -35,6 +35,7 @@ public class RubyController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         
+
         currentHealth = maxHealth;
 
         audioSource = GetComponent<AudioSource>();
@@ -97,6 +98,7 @@ public class RubyController : MonoBehaviour
     {
         if (amount < 0)
         {
+            animator.SetTrigger("Hit");
             if (isInvincible)
                 return;
             
@@ -104,6 +106,9 @@ public class RubyController : MonoBehaviour
             invincibleTimer = timeInvincible;
             
             PlaySound(hitSound);
+            damgeEffect.Play();
+            
+
         }
         
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
