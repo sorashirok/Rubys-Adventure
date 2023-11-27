@@ -94,6 +94,9 @@ public class EnemyController : MonoBehaviour
         rigidbody2d.simulated = false;
         //optional if you added the fixed animation
         animator.SetTrigger("Fixed");
+
+        UIManger.instance.scoreCount++;
+        UIManger.instance.UpdateRobotCounterUI(); 
         
         smokeEffect.Stop();
     }

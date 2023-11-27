@@ -13,7 +13,7 @@ public class RubyController : MonoBehaviour
    [SerializeField] private GameObject Winnertext;
 
 
-    public int RobotsFixed;
+    public int scoreCount;
     public float speed = 3.0f;
     
     public int maxHealth = 5;
@@ -115,7 +115,7 @@ public class RubyController : MonoBehaviour
             }
         }
        
-        if ( RobotsFixed == 2)
+        if (  UIManger.instance.scoreCount == 2)
         {
             StartCoroutine(WinSequence());
             if (Input.GetKeyDown(KeyCode.R))
