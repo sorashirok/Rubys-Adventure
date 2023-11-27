@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int Fixedrobots;
     Rigidbody2D rigidbody2d;
     
     void Awake()
@@ -30,8 +31,9 @@ public class Projectile : MonoBehaviour
         if (e != null)
         {
             e.Fix();
+            
         }
-    
+        
         Destroy(gameObject);
     }
 }

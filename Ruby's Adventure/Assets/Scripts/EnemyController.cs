@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+
+     
     public float speed;
     public bool vertical;
     public float changeTime = 3.0f;
@@ -16,6 +19,8 @@ public class EnemyController : MonoBehaviour
     bool broken = true;
     
     Animator animator;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,7 @@ public class EnemyController : MonoBehaviour
             direction = -direction;
             timer = changeTime;
         }
+        
     }
     
     void FixedUpdate()
@@ -66,6 +72,8 @@ public class EnemyController : MonoBehaviour
         }
         
         rigidbody2d.MovePosition(position);
+
+       
     }
     
     void OnCollisionEnter2D(Collision2D other)
@@ -81,6 +89,7 @@ public class EnemyController : MonoBehaviour
     //Public because we want to call it from elsewhere like the projectile script
     public void Fix()
     {
+        
         broken = false;
         rigidbody2d.simulated = false;
         //optional if you added the fixed animation
