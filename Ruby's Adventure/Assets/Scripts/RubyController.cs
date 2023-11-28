@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RubyController : MonoBehaviour
 {
+
+   [SerializeField] private GameObject gameOverPanel;
+   [SerializeField] private Text restartandQuitText;
+   [SerializeField] private GameObject WinnerPanel;
+   [SerializeField] private GameObject Winnertext;
+
+
+    public int scoreCount;
     public float speed = 3.0f;
     
     public int maxHealth = 5;
     
     public GameObject projectilePrefab;
-    
+    public ParticleSystem damgeEffect;
+
     public AudioClip throwSound;
     public AudioClip hitSound;
     
@@ -28,16 +39,27 @@ public class RubyController : MonoBehaviour
     Vector2 lookDirection = new Vector2(1,0);
     
     AudioSource audioSource;
-    
+    private  bool Gameover = false;
+   
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         
+
         currentHealth = maxHealth;
 
         audioSource = GetComponent<AudioSource>();
+
+
+        gameOverPanel.SetActive(false);
+        restartandQuitText.gameObject.SetActive(false);
+        WinnerPanel.SetActive(false);
+        Winnertext.gameObject.SetActive(false);
+
+
     }
 
     // Update is called once per frame
@@ -82,6 +104,27 @@ public class RubyController : MonoBehaviour
                 }
             }
         }
+        if (Gameover == true)
+        {
+            Debug.Log("test before restart");
+            StartCoroutine(GameOverSequence());
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log("key input was pressed");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+       
+        if (  UIManger.instance.scoreCount == 2)
+        {
+            StartCoroutine(WinSequence());
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log("key input was pressed");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
     }
     
     void FixedUpdate()
@@ -95,8 +138,17 @@ public class RubyController : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
+
         if (amount < 0)
         {
+            if(currentHealth == 0)
+            {
+                rigidbody2d.simulated = false;
+                Gameover = true;
+              
+            }
+
+            animator.SetTrigger("Hit");
             if (isInvincible)
                 return;
             
@@ -104,6 +156,9 @@ public class RubyController : MonoBehaviour
             invincibleTimer = timeInvincible;
             
             PlaySound(hitSound);
+            damgeEffect.Play();
+
+           
         }
         
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
@@ -127,5 +182,25 @@ public class RubyController : MonoBehaviour
     {
         audioSource.PlayOneShot(clip);
     }
-    
+
+
+    IEnumerator GameOverSequence()
+    {
+       gameOverPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        restartandQuitText.gameObject.SetActive(true);
+
+    }
+
+    IEnumerator WinSequence()
+    {
+        WinnerPanel.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        Winnertext.gameObject.SetActive(true);
+    }
+
 }
