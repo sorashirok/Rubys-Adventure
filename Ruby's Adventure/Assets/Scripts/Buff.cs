@@ -11,8 +11,5 @@ public class Buff : PowerUpEffect
     public override void Apply(GameObject target)
     {
         target.GetComponent<RubyController>().speed += amount;
-        target.GetComponent<RubyController>().projectilePrefab = newProjectile;
-
-
     }
 }
