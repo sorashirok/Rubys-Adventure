@@ -11,6 +11,8 @@ public class RubyController : MonoBehaviour
    [SerializeField] private Text restartandQuitText;
    [SerializeField] private GameObject WinnerPanel;
    [SerializeField] private GameObject Winnertext;
+   [SerializeField] private GameObject WinnerPanelLvL2;
+   [SerializeField] private GameObject WinnertextLvL2;
 
 
     public int scoreCount;
@@ -40,7 +42,9 @@ public class RubyController : MonoBehaviour
     
     AudioSource audioSource;
     private  bool Gameover = false;
-   
+    private bool hasWon = false;
+    private bool canDisplayWinText = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +62,8 @@ public class RubyController : MonoBehaviour
         restartandQuitText.gameObject.SetActive(false);
         WinnerPanel.SetActive(false);
         Winnertext.gameObject.SetActive(false);
+        WinnerPanelLvL2.SetActive(false);
+        WinnertextLvL2.gameObject.SetActive(false);
 
 
     }
@@ -106,23 +112,73 @@ public class RubyController : MonoBehaviour
         }
         if (Gameover == true)
         {
-            Debug.Log("test before restart");
             StartCoroutine(GameOverSequence());
-            if (Input.GetKeyDown(KeyCode.R))
+
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                Debug.Log("key input was pressed");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+                SceneManager.LoadScene("QuitGame");
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+                {
+                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            
+
         }
        
-        if (  UIManger.instance.scoreCount == 2)
+        if (  UIManger.instance.scoreCount == 2 )
         {
-            StartCoroutine(WinSequence());
+             StartCoroutine(WinSequence());
+          
+            if (Input.GetKeyDown(KeyCode.R))
+                {
+                  SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+                {
+                  SceneManager.LoadScene("QuitGame");
+                }
+
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+
+                SceneManager.LoadScene("Level 2");
+                WinnerPanel.SetActive(false);
+                Winnertext.gameObject.SetActive(false);
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+
+
+        }
+
+        if (BossMonster.BossHealth == 0) 
+        {
+            StartCoroutine(WinSequence2());
+
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Debug.Log("key input was pressed");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SceneManager.LoadScene("QuitGame");
+            }
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+
+
         }
 
     }
@@ -197,10 +253,32 @@ public class RubyController : MonoBehaviour
     IEnumerator WinSequence()
     {
         WinnerPanel.SetActive(true);
-
         yield return new WaitForSeconds(2.0f);
-
         Winnertext.gameObject.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+
+            SceneManager.LoadScene("Level 2");
+            WinnerPanel.SetActive(false);
+            Winnertext.gameObject.SetActive(false);
+
+        }
+
+
     }
+
+    IEnumerator WinSequence2()
+    {
+        WinnerPanelLvL2.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        WinnertextLvL2.gameObject.SetActive(true);
+
+        
+
+
+    }
+
+
 
 }
