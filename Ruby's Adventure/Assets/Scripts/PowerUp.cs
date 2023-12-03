@@ -5,11 +5,18 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     public PowerUpEffect powerupEffect;
+    public AudioClip SFX;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
-        powerupEffect.Apply(collision.gameObject);
-    }
+        RubyController controller = other.GetComponent<RubyController>();
 
+        if (controller != null)
+        {
+            Destroy(gameObject);
+            powerupEffect.Apply(other.gameObject);
+
+            controller.PlaySound(SFX);
+        }
+    }
 }

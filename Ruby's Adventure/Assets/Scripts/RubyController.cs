@@ -23,6 +23,7 @@ public class RubyController : MonoBehaviour
 
     public AudioClip throwSound;
     public AudioClip hitSound;
+    public AudioClip Dialog;
     
     public int health { get { return currentHealth; }}
     int currentHealth;
@@ -41,6 +42,7 @@ public class RubyController : MonoBehaviour
     AudioSource audioSource;
     private  bool Gameover = false;
    
+    public  int projectileSpeed = 600;
 
     // Start is called before the first frame update
     void Start()
@@ -101,6 +103,7 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
+                    PlaySound(Dialog);
                 }
             }
         }
@@ -115,7 +118,7 @@ public class RubyController : MonoBehaviour
             }
         }
        
-        if (  UIManger.instance.scoreCount == 2)
+        if (  UIManger.instance.scoreCount == 5)
         {
             StartCoroutine(WinSequence());
             if (Input.GetKeyDown(KeyCode.R))
@@ -170,8 +173,8 @@ public class RubyController : MonoBehaviour
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
-        Projectile projectile = projectileObject.GetComponent<Projectile>() ;
-        projectile.Launch(lookDirection, 600);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(lookDirection, projectileSpeed);
 
         animator.SetTrigger("Launch");
         

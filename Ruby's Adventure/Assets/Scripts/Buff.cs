@@ -7,9 +7,11 @@ using UnityEngine;
 public class Buff : PowerUpEffect
 {
     public float amount;
-    public GameObject newProjectile;
+    public int projectileAmount;
+
     public override void Apply(GameObject target)
     {
         target.GetComponent<RubyController>().speed += amount;
+        target.GetComponent<RubyController>().projectileSpeed += projectileAmount;
     }
 }
