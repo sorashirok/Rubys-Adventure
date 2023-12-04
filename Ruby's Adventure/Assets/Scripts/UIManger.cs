@@ -34,7 +34,7 @@ public class UIManger : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
 
-            /*
+            
             If Q is hit, quit the game
             if (Input.GetKeyDown(KeyCode.Q))
             {
