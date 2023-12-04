@@ -25,7 +25,7 @@ public class RubyController : MonoBehaviour
 
     public AudioClip throwSound;
     public AudioClip hitSound;
-    public AudioClip Dialog;
+    public AudioClip Dialog; //Added by Hector Merced
     
     public int health { get { return currentHealth; }}
     int currentHealth;
@@ -44,7 +44,7 @@ public class RubyController : MonoBehaviour
     AudioSource audioSource;
     private  bool Gameover = false;
    
-    public  int projectileSpeed = 600;
+    public  int projectileSpeed = 600; // Added by Hector Merced
     private bool hasWon = false;
     private bool canDisplayWinText = false;
 
@@ -110,7 +110,7 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
-                    PlaySound(Dialog);
+                    PlaySound(Dialog); // Added by Hector Merced
                 }
             }
         }

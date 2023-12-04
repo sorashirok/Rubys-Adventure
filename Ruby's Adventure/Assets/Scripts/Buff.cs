@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This sript was written by Hector Merced
+
 [CreateAssetMenu(menuName = "Powerups/Buff")]
 
 public class Buff : PowerUpEffect
