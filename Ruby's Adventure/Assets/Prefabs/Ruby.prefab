@@ -106,13 +106,16 @@ MonoBehaviour:
   restartandQuitText: {fileID: 0}
   WinnerPanel: {fileID: 0}
   Winnertext: {fileID: 0}
+  scoreCount: 0
   speed: 3
   maxHealth: 5
   projectilePrefab: {fileID: 3588354726426260967, guid: 39559749986833f49a1345c7b8303f09, type: 3}
   damgeEffect: {fileID: 3783194902910103239, guid: bcd42221de716e44cbcfff907f409c8f, type: 3}
   throwSound: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
   hitSound: {fileID: 8300000, guid: 9b1bb1f450b7d444fa4a8019d13519a7, type: 3}
+  Dialog: {fileID: 8300000, guid: a14c4646d5ea4c646b3a732c13a17cf1, type: 3}
   timeInvincible: 2
+  projectileSpeed: 400
 --- !u!50 &8759571242310665500
 Rigidbody2D:
   serializedVersion: 4
